@@ -23,3 +23,16 @@ export const exchange = (
     const q = nacl.scalarMult(myPrivate, otherPublic);
     return toHex(q);
 };
+
+/**
+ * Gets the ed25519 public key for a private key
+ * @param x25519PrivateStr 32 byte hexadecimal string of a secret key
+ * @returns 32 byte hexadecimal string of the public key
+ */
+export const x25519GetPublicFromPrivate = (
+    x25519PrivateStr: string
+): string => {
+    const x25519Private = toArray(x25519PrivateStr);
+    const x25519Public = nacl.scalarMult.base(x25519Private);
+    return toHex(x25519Public);
+};
